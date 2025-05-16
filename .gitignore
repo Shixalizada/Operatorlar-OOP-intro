@@ -1,32 +1,72 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+class Program
+{
+    static void Main(string[] args)
+    {
+        int balance = 1000;
+        int pin = 1234;
 
-# Precompiled Headers
-*.gch
-*.pch
+        Console.Write("PIN daxil edin: ");
+        int inputPin = Convert.ToInt32(Console.ReadLine());
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+        if (inputPin != pin)
+        {
+            Console.WriteLine("Yanlış PIN!");
+            return;
+        }
 
-# Fortran module files
-*.mod
-*.smod
+        while (true)
+        {
+            Console.WriteLine("\n1 - Pul Çıxart (Cash out)");
+            Console.WriteLine("2 - Pul Yatır (Cash in)");
+            Console.WriteLine("3 - Balansa Bax (Show Balance)");
+            Console.WriteLine("4 - PIN Dəyiş (Change PIN)");
+            Console.WriteLine("5 - Çıxış (Exit)");
+            Console.Write("Seçiminizi daxil edin: ");
+            string choice = Console.ReadLine();
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Çıxartmaq istədiyiniz məbləği daxil edin: ");
+                    int withdraw = Convert.ToInt32(Console.ReadLine());
+                    if (withdraw > balance)
+                    {
+                        Console.WriteLine("Kifayət qədər balans yoxdur!");
+                    }
+                    else
+                    {
+                        balance -= withdraw;
+                        Console.WriteLine($"Yeni balans: {balance} AZN");
+                    }
+                    break;
 
-# Executables
-*.exe
-*.out
-*.app
+                case "2":
+                    Console.Write("Yatırmaq istədiyiniz məbləği daxil edin: ");
+                    int deposit = Convert.ToInt32(Console.ReadLine());
+                    balance += deposit;
+                    Console.WriteLine($"Yeni balans: {balance} AZN");
+                    break;
+
+                case "3":
+                    Console.WriteLine($"Balans: {balance} AZN");
+                    break;
+
+                case "4":
+                    Console.Write("Yeni PIN daxil edin: ");
+                    int newPin = Convert.ToInt32(Console.ReadLine());
+                    pin = newPin;
+                    Console.WriteLine("PIN uğurla dəyişdirildi.");
+                    break;
+
+                case "5":
+                    Console.WriteLine("Çıxış edilir...");
+                    return;
+
+                default:
+                    Console.WriteLine("Yanlış seçim!");
+                    break;
+            }
+        }
+    }
+}
